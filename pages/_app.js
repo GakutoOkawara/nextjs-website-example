@@ -1,15 +1,16 @@
 import Link from "next/link"
 import "../styles/global.css"
+import styles from "../styles/App.module.css"
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <div>
-      <div>
-        <header>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <header className={styles.header}>
           <h1>My Website</h1>
         </header>
 
-        <nav>
+        <nav className={styles.nav}>
           <ul>
             <li>
               <Link href="/">Home</Link>
@@ -20,12 +21,12 @@ const MyApp = ({ Component, pageProps }) => {
           </ul>
         </nav>
 
-        <main>
+        <main className={styles.main}>
           <Component {...pageProps} />
         </main>
 
-        <footer>
-          <div>
+        <footer className={styles.footer}>
+          <div className={styles.inner}>
             Powered by <a href="https://nextjs.org/">Next.js</a>
           </div>
         </footer>
