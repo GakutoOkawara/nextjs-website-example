@@ -3,6 +3,7 @@ import path from "path"
 import matter from "gray-matter"
 import Head from "next/head"
 import Link from "next/link"
+import styles from "../../styles/BlogList.module.css"
 
 const BlogListPage = ({ posts }) => {
   return (
@@ -13,7 +14,7 @@ const BlogListPage = ({ posts }) => {
 
       <h2>Blog</h2>
 
-      <ul>
+      <ul className={styles.list}>
         {
           posts.map(post => {
             return (
