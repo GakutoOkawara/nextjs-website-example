@@ -1,7 +1,25 @@
 import fs from "fs"
+import path from "path"
+import matter from "gray-matter"
+import Head from "next/head"
 
-const BlogPage = () => {
-  return <p>ここはブログ記事詳細ページです。</p>
+const BlogPage = ({ post }) => {
+  return (
+    <>
+      <Head>
+        <title>{post.title} | MyWebsite</title>
+      </Head>
+      <article>
+        <header>
+          <h2>{post.title}</h2>
+          <span>
+            Posted: <time dateTime={post.date}>{post.date}</time>
+          </span>
+        </header>
+        <div>{post.body}</div>
+      </article>
+    </>
+  )
 }
 
 export const getStaticPaths = () => {
@@ -14,18 +32,22 @@ export const getStaticPaths = () => {
     }
   })
 
-  console.log(paths)
-
   return {
     paths,
     fallback: false
   }
 }
 
-export const getStaticProps = () => {
-  return {
-    props: {}
+export const getStaticProps = ({ params }) => {
+  const postPath = path.join("data", `${params.slug}.md`)
+  const file = matter.read(postPath)
+  const post = {
+    title: file.data.title,
+    date: file.data.date,
+    body: file.content
   }
+
+  return { props: { post }}
 }
 
 export default BlogPage
